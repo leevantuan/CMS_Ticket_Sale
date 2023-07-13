@@ -1,0 +1,17 @@
+.container-menu {
+  height: 572px;
+  width: 252px;
+  position: fixed;
+  top: 17px;
+  left: 33px;
+  background-color: #f9f6f4;
+}
+:where(.css-dev-only-do-not-override-14wwjjs).ant-menu-light .ant-menu-item-selected {
+  background-color: var(--yellow-0, #ffb800);
+}
+:where(.css-dev-only-do-not-override-14wwjjs).ant-menu-light .ant-menu-item-selected {
+  color: #fff;
+}
+.logo-menu {
+  margin-bottom: 59px;
+}

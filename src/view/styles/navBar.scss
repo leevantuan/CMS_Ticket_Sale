@@ -1,0 +1,23 @@
+.container-navBar {
+  width: 80%;
+  position: fixed;
+  top: 17px;
+}
+.form-control {
+  padding: 10px 16px;
+  background-color: #ededed;
+  border: none;
+  border-radius: 12px;
+}
+.position-icons-search {
+  top: 6px;
+  right: 16px;
+}
+svg {
+  width: 1.5em;
+  height: 1.5em;
+  fill: currentcolor;
+}
+.list-style-none {
+  list-style: none;
+}
