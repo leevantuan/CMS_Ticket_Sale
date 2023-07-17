@@ -1,0 +1,37 @@
+.btn-outline-warning:hover {
+  color: #000;
+  background-color: #ffc10728;
+  border-color: #ffc107;
+}
+.input-service,
+.input-service-width {
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #a5a8b1;
+}
+.input-service {
+  width: 330px;
+  padding: 8px 41px 8px 16px;
+}
+.input-service-width {
+  width: 300px;
+  padding: 8px 41px 8px 16px;
+}
+.input-service-width {
+}
+:where(.css-dev-only-do-not-override-14wwjjs).ant-modal .ant-modal-content {
+  width: 750px;
+}
+.input-price-ticket-combo,
+.input-price-ticket,
+.input-quantity-ticket-combo {
+  width: 150px;
+  border-radius: 8px;
+  border: none;
+  background-color: #f1f4f8;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+.input-quantity-ticket-combo {
+  width: 100px;
+}

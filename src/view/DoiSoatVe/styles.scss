@@ -1,0 +1,38 @@
+.container-check-ticket {
+  width: 1097px;
+  height: 863px;
+  background-color: #fff;
+  border-radius: 12px;
+  .title-check-ticket {
+    font-size: 36px;
+  }
+}
+.container-filter-check-ticket {
+  width: 446px;
+  height: 863px;
+  background-color: #fff;
+  border-radius: 12px;
+  .title-filter {
+    font-size: 24px;
+  }
+  > select {
+    width: 90%;
+    background-color: #f1f4f8;
+    border: none;
+    border-radius: 8px;
+    color: #7c7d95;
+  }
+  .state-check-ticket {
+    > h6 {
+      width: 200px;
+      font-weight: bold;
+    }
+  }
+}
+.container-main {
+  width: 1567px;
+  height: 863px;
+}
+.btn-filter-check-ticket {
+  padding: 10px 36px;
+}

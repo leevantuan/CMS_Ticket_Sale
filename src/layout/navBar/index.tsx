@@ -6,7 +6,7 @@ import InputSearch from '../../shared/components/inputSearch/inputSearch';
 export default function NavBar() {
   return (
     <div className="container-navBar d-flex justify-content-between">
-      <InputSearch width={470} height={48} placeholder="Search ..." />
+      <InputSearch width={470} height={48} placeholder="Search ..." HandleInputSearch={() => {}} />
       <ul className="d-flex align-items-center list-style-none">
         <li className="ms-4">
           <MailOutlined />

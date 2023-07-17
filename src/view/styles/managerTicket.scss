@@ -14,3 +14,15 @@
   font-weight: 600;
   border: 1.5px solid #ff993c;
 }
+.type-tickets {
+  cursor: pointer;
+  box-sizing: border-box;
+  font-weight: 600;
+  &:hover {
+    color: #ff993c;
+  }
+}
+.type-tickets-active {
+  color: #ff993c;
+  border-bottom: 4px solid #ff993c;
+}

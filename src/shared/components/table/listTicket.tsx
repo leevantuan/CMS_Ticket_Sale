@@ -4,25 +4,91 @@ import { useAppSelector, useAppDispatch } from '../../../shared/hooks/hook';
 import { fetchData } from '../../../core/redux';
 import ReactPaginate from 'react-paginate';
 import moment from 'moment';
-import { openModalUpdate } from '../../../@types/types';
+import { openModalUpdate, ticketsInterface } from '../../../@types/types';
 
 import { AiFillMinusCircle } from 'react-icons/ai';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import { AiOutlineMore } from 'react-icons/ai';
+import { ConvertToTimestamp, SoSanhDateTicket } from '../../../handleLogic/handle';
 
 export default function ListTicket(props: openModalUpdate) {
+  const [listTickets, setListTicket] = useState<ticketsInterface[]>([]);
   const dispatch = useAppDispatch();
-  const listTickets = useAppSelector(state => state.tickets.tickets);
-  const dateNow: string = moment().format('DD-MM-YYYY');
+  const listTicketStore = useAppSelector(state => state.tickets.tickets);
+  const dateNow: string = moment().format('DD/MM/YYYY');
 
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
 
+  useEffect(() => {
+    const filterType = listTicketStore.filter(ticket => ticket.type === props.typeTicket);
+    const inputSearch = filterType.filter(ticket => ticket.id.includes(props.inputSearch));
+
+    const fromDate: Date = ConvertToTimestamp(props.fromDate, '00:00:00');
+    const toDate: Date = ConvertToTimestamp(props.toDate, '00:00:00');
+
+    const filterDate = inputSearch.filter(ticket => {
+      const ngaySuDung: Date = ConvertToTimestamp(ticket.ngaySuDung, '00:00:00');
+      if (ngaySuDung >= fromDate && ngaySuDung <= toDate) {
+        return ticket;
+      }
+      return '';
+    });
+
+    let filterValue: ticketsInterface[];
+    switch (props.value) {
+      case 1: {
+        filterValue = filterDate.filter(ticket => ticket.tinhTrang === true);
+        break;
+      }
+      case 2: {
+        filterValue = filterDate.filter(ticket => {
+          const ngaySuDung: Date = ConvertToTimestamp(ticket.ngaySuDung, '00:00:00');
+          const setDateNow: Date = ConvertToTimestamp(dateNow, '00:00:00');
+          if (ngaySuDung > setDateNow && ticket.tinhTrang === false) {
+            return ticket;
+          }
+          return null;
+        });
+        break;
+      }
+      case 3: {
+        filterValue = filterDate.filter(ticket => {
+          const ngaySuDung: Date = ConvertToTimestamp(ticket.ngaySuDung, '00:00:00');
+          const setDateNow: Date = ConvertToTimestamp(dateNow, '00:00:00');
+          if (ngaySuDung < setDateNow) {
+            return ticket;
+          }
+          return null;
+        });
+        break;
+      }
+      default:
+        filterValue = filterDate;
+        break;
+    }
+
+    let filter: ticketsInterface[];
+    if (props.checkedList.find(check => check === '0')) {
+      filter = filterValue;
+    } else {
+    }
+    setListTicket(filterValue);
+  }, [
+    props.typeTicket,
+    listTicketStore,
+    props.inputSearch,
+    props.fromDate,
+    props.toDate,
+    props.value,
+    props.checkedList,
+    dateNow,
+  ]);
   //Pagination
   const [NumberPage, setNumberPage] = useState<number>(1);
-  const [currentLastPage] = useState<number>(2);
+  const [currentLastPage] = useState<number>(9);
   let totalPage = Math.ceil(listTickets.length / currentLastPage);
   const indexOfLastPost = NumberPage * currentLastPage;
   const indexOfFistPost = indexOfLastPost - currentLastPage;
@@ -48,6 +114,7 @@ export default function ListTicket(props: openModalUpdate) {
         </thead>
         <tbody>
           {CurrentProducts.map((ticket: any, index: number) => {
+            const checkNgaySuDung = SoSanhDateTicket(ticket.ngaySuDung, dateNow);
             return (
               <tr key={ticket.id}>
                 <th scope="row">{index + 1}</th>
@@ -55,7 +122,7 @@ export default function ListTicket(props: openModalUpdate) {
                 <td>{ticket.id}</td>
                 <td>{ticket.tenSuKien}</td>
                 <td>
-                  {ticket.ngaySuDung === dateNow ? (
+                  {!checkNgaySuDung ? (
                     <button type="button" className="btn btn-outline-danger" disabled>
                       <AiFillMinusCircle />
                       Hết hạn
@@ -92,7 +159,7 @@ export default function ListTicket(props: openModalUpdate) {
           })}
         </tbody>
       </table>
-      <div className="page-products">
+      <div className="page-products mt-4">
         <ReactPaginate
           breakLabel="..."
           nextLabel=" > "

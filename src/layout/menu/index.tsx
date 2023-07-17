@@ -3,6 +3,7 @@ import { Menu } from 'antd';
 import type { MenuProps } from 'antd/es/menu';
 import '../../view/styles/menu.scss';
 import logo from '../../shared/assets/insight-05 1.png';
+import { useState } from 'react';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -28,6 +29,10 @@ const items: MenuItem[] = [
 ];
 
 export default function IMenu() {
+  const [handlePage, setHandlePage] = useState<string>('');
+  const HanldeClickMenu = ({ item, key, keyPath, selectedKeys, domEvent }: any) => {
+    setHandlePage(key);
+  };
   return (
     <div className="container-menu">
       <img src={logo} className="logo-menu" alt="logo" />
@@ -37,6 +42,7 @@ export default function IMenu() {
         defaultOpenKeys={['sub1']}
         mode="inline"
         items={items}
+        onSelect={HanldeClickMenu}
       />
     </div>
   );

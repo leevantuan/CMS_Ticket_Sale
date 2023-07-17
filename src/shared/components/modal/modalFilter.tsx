@@ -1,7 +1,7 @@
 import '../../../view/styles/managerTicket.scss';
 import { modalFilter } from '../../../@types/types';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import moment from 'moment';
 
@@ -12,7 +12,7 @@ import { Checkbox, Col, Row } from 'antd';
 import type { CheckboxValueType } from 'antd/es/checkbox/Group';
 
 export default function ModalFilter(props: modalFilter) {
-  const dateNow: string = moment().format('DD-MM-YYYY');
+  const dateNow: string = moment().format('DD/MM/YYYY');
   const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY', 'DD-MM-YYYY', 'DD-MM-YY'];
   const CheckboxGroup = Checkbox.Group;
 
@@ -20,6 +20,11 @@ export default function ModalFilter(props: modalFilter) {
   const [checkedList, setCheckedList] = useState<CheckboxValueType[]>([]);
   const [fromDate, setFromDate] = useState<string>('');
   const [toDate, setToDate] = useState<string>('');
+
+  useEffect(() => {
+    setFromDate('01/07/2023');
+    setToDate('01/08/2023');
+  }, [dateNow]);
 
   const onChangeFromDate: DatePickerProps['onChange'] = (date, dateString) => {
     setFromDate(dateString);
@@ -30,7 +35,6 @@ export default function ModalFilter(props: modalFilter) {
   };
 
   const onChange = (e: RadioChangeEvent) => {
-    console.log('radio checked', e.target.value);
     setValue(e.target.value);
   };
 
@@ -45,10 +49,6 @@ export default function ModalFilter(props: modalFilter) {
       }
     }
   };
-  //btn filter
-  const HandleClickFilter = () => {
-    console.log(fromDate, toDate);
-  };
   return (
     <Modal
       open={props.open}
@@ -56,7 +56,7 @@ export default function ModalFilter(props: modalFilter) {
       title="Lọc vé"
       footer={
         <button
-          onClick={HandleClickFilter}
+          onClick={() => props.HandleClickFilter(fromDate, toDate, value, checkedList)}
           className="btn btn-outline-warning pe-5 ps-5 custom-modal-filter mt-3"
         >
           Lọc
@@ -68,7 +68,7 @@ export default function ModalFilter(props: modalFilter) {
           <h6 className="fw-bold">Từ ngày</h6>
           <DatePicker
             onChange={onChangeFromDate}
-            defaultValue={dayjs(dateNow, dateFormatList[0])}
+            value={dayjs(fromDate, dateFormatList[0])}
             format={dateFormatList}
           />
         </div>
@@ -76,7 +76,7 @@ export default function ModalFilter(props: modalFilter) {
           <h6 className="fw-bold">Đến ngày</h6>
           <DatePicker
             onChange={onChangeToDate}
-            defaultValue={dayjs(dateNow, dateFormatList[0])}
+            value={dayjs(toDate, dateFormatList[0])}
             format={dateFormatList}
           />
         </div>

@@ -1,10 +1,10 @@
 import './styles/app.scss';
-import Home from './Home';
+import Main from '../routers';
 
 function App() {
   return (
     <div className="App">
-      <Home />
+      <Main />
     </div>
   );
 }
