@@ -33,6 +33,7 @@ export default function ModalUpdateService(props: openModalUpdateService) {
   const [serviceName, setServiceName] = useState<string>('');
   const [price, setPrice] = useState<number>(0);
   const [priceCombo, setPriceCombo] = useState<number>(0);
+  const [quantity, setQuantity] = useState<number>(0);
 
   useEffect(() => {
     if (findService) {
@@ -95,6 +96,7 @@ export default function ModalUpdateService(props: openModalUpdateService) {
                 serviceName,
                 state,
                 price,
+                quantity,
               )
             }
             className="btn btn-warning pe-5 ps-5 custom-modal-filter mt-3 ms-4"
@@ -179,8 +181,8 @@ export default function ModalUpdateService(props: openModalUpdateService) {
                 <input
                   type="number"
                   className="input-quantity-ticket-combo ms-2 me-2"
-                  value={priceCombo === 0 ? 0 : 4}
-                  onChange={() => {}}
+                  value={quantity}
+                  onChange={e => setQuantity(e.target.valueAsNumber)}
                   // disabled={priceCombo === 0 ? true : false}
                 />
                 vé

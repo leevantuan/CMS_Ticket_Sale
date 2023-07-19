@@ -138,6 +138,7 @@ export const fetchDataServices = createAsyncThunk(
         ngayHetHan: ngayHetHan,
         gioHetHan: gioHetHan,
         price: event.price,
+        quantity: event.quantity,
       };
       return newData;
     });
@@ -156,6 +157,7 @@ export const updateDataServices = createAsyncThunk(
         ngaySuDung: updateDataService.ngaySuDung,
         ngayHetHan: updateDataService.ngayHetHan,
         price: updateDataService.price,
+        quantity: updateDataService.quantity,
       },
     });
 
@@ -181,6 +183,7 @@ export const updateDataServices = createAsyncThunk(
         ngayHetHan: ngayHetHan,
         gioHetHan: gioHetHan,
         price: event.price,
+        quantity: event.quantity,
       };
       return newData;
     });
@@ -198,6 +201,7 @@ export const addDataServices = createAsyncThunk(
       ngaySuDung: addDataService.ngaySuDung,
       ngayHetHan: addDataService.ngayHetHan,
       price: addDataService.price,
+      quantity: addDataService.quantity,
     });
 
     const getDatas = await getDocs(servicesRef);
@@ -222,6 +226,7 @@ export const addDataServices = createAsyncThunk(
         ngayHetHan: ngayHetHan,
         gioHetHan: gioHetHan,
         price: event.price,
+        quantity: event.quantity,
       };
       return newData;
     });

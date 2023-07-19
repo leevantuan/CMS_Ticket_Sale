@@ -43,6 +43,7 @@ export default function Setting() {
     serviceName: string,
     state: string,
     price: number,
+    quantity: number,
   ) => {
     const checkNgaySuDung = SoSanhDate(fromDate, dateNow, fromTime, timeNow);
     const checkNgayHetHan = SoSanhDate(toDate, fromDate, toTime, fromTime);
@@ -64,6 +65,7 @@ export default function Setting() {
         ngaySuDung: ngaySuDung,
         ngayHetHan: ngayHetHan,
         price: price,
+        quantity: quantity,
       };
       dispatch(updateDataServices(updateData));
       setOpenUpdateService(false);
@@ -81,6 +83,7 @@ export default function Setting() {
     serviceName: string,
     state: string,
     price: number,
+    quantity: number,
   ) => {
     const checkNgaySuDung = SoSanhDate(fromDate, dateNow, fromTime, timeNow);
     const checkNgayHetHan = SoSanhDate(toDate, fromDate, toTime, fromTime);
@@ -109,6 +112,7 @@ export default function Setting() {
         ngaySuDung: ngaySuDung,
         ngayHetHan: ngayHetHan,
         price: price,
+        quantity: quantity,
       };
 
       dispatch(addDataServices(updateData));

@@ -2,7 +2,6 @@ import { openModalAddService } from '../../../../@types/types';
 import '../styles.scss';
 
 import { useEffect, useState } from 'react';
-
 import { DatePicker, DatePickerProps, Modal, TimePicker, TimePickerProps } from 'antd';
 import { Checkbox } from 'antd';
 import type { CheckboxValueType } from 'antd/es/checkbox/Group';
@@ -22,6 +21,7 @@ export default function ModalAddService(props: openModalAddService) {
   const [serviceName, setServiceName] = useState<string>('');
   const [price, setPrice] = useState<number>(0);
   const [priceCombo, setPriceCombo] = useState<number>(0);
+  const [quantity, setQuantity] = useState<number>(0);
 
   const onChangeFromDate: DatePickerProps['onChange'] = (date, dateString) => {
     setFromDate(dateString);
@@ -78,6 +78,7 @@ export default function ModalAddService(props: openModalAddService) {
                 serviceName,
                 state,
                 price,
+                quantity,
               )
             }
             className="btn btn-warning pe-5 ps-5 custom-modal-filter mt-3 ms-4"
@@ -155,6 +156,7 @@ export default function ModalAddService(props: openModalAddService) {
               className="input-quantity-ticket-combo ms-2 me-2"
               placeholder="Số lượng ... "
               disabled={checkCombo ? false : true}
+              onChange={e => setQuantity(e.target.valueAsNumber)}
             />
             vé
           </Checkbox>

@@ -34,6 +34,7 @@ export interface servicesInterface {
   ngayHetHan: string;
   gioHetHan: string;
   price: number;
+  quantity: number;
 }
 export interface updateServicesInterface {
   id: string;
@@ -44,6 +45,7 @@ export interface updateServicesInterface {
   ngaySuDung: Date;
   ngayHetHan: Date;
   price: number;
+  quantity: number;
 }
 export interface addServicesInterface {
   combo: number;
@@ -53,8 +55,10 @@ export interface addServicesInterface {
   ngaySuDung: Date;
   ngayHetHan: Date;
   price: number;
+  quantity: number;
 }
 export interface eventsInterface {
+  id: string;
   eventName: string;
   ngaySuDung: string;
   state: boolean;
@@ -101,6 +105,7 @@ export interface openModalAddService {
     serviceName: string,
     state: string,
     price: number,
+    quantity: number,
   ) => void;
   openAddService: boolean;
 }
@@ -116,6 +121,7 @@ export interface openModalUpdateService {
     serviceName: string,
     state: string,
     price: number,
+    quantity: number,
   ) => void;
   openUpdateService: boolean;
   id: string;
