@@ -190,7 +190,7 @@ export default function AddTicket() {
         </div>
         <div className="col-12 mt-4">
           <button type="submit" className="btn btn-primary pe-4 ps-4" onClick={HandleSubmit}>
-            Xuất
+            Xuất hóa đơn
           </button>
         </div>
       </div>

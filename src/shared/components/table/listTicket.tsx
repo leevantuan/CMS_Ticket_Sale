@@ -14,8 +14,10 @@ import { ConvertToTimestamp, SoSanhDateTicket } from '../../../handleLogic/handl
 
 export default function ListTicket(props: openModalUpdate) {
   const [listTickets, setListTicket] = useState<ticketsInterface[]>([]);
+  const [checkUseDate, setCheckUseDate] = useState<boolean>(true);
   const dispatch = useAppDispatch();
   const listTicketStore = useAppSelector(state => state.tickets.tickets);
+  const listServiceStore = useAppSelector(state => state.tickets.services);
   const dateNow: string = moment().format('DD/MM/YYYY');
 
   useEffect(() => {
@@ -23,6 +25,11 @@ export default function ListTicket(props: openModalUpdate) {
   }, [dispatch]);
 
   useEffect(() => {
+    const check = listServiceStore.find(service => service.serviceName === props.typeTicket);
+
+    if (check) {
+      setCheckUseDate(check.state);
+    }
     const filterType = listTicketStore.filter(ticket => ticket.type === props.typeTicket);
     const inputSearch = filterType.filter(ticket => ticket.id.includes(props.inputSearch));
 
@@ -70,12 +77,18 @@ export default function ListTicket(props: openModalUpdate) {
         break;
     }
 
-    let filter: ticketsInterface[];
+    let filter: ticketsInterface[] = [];
     if (props.checkedList.find(check => check === '0')) {
       filter = filterValue;
     } else {
+      const filterCheck = props.checkedList.map(check => {
+        const list = filterValue.filter(ticket => ticket.congCheckIn === check);
+        return list;
+      });
+
+      filterCheck.map(check => filter.push(...check));
     }
-    setListTicket(filterValue);
+    setListTicket(filter);
   }, [
     props.typeTicket,
     listTicketStore,
@@ -85,6 +98,7 @@ export default function ListTicket(props: openModalUpdate) {
     props.value,
     props.checkedList,
     dateNow,
+    listServiceStore,
   ]);
   //Pagination
   const [NumberPage, setNumberPage] = useState<number>(1);
@@ -122,20 +136,27 @@ export default function ListTicket(props: openModalUpdate) {
                 <td>{ticket.id}</td>
                 <td>{ticket.tenSuKien}</td>
                 <td>
-                  {!checkNgaySuDung ? (
+                  {checkUseDate ? (
+                    ticket.tinhTrang ? (
+                      <button type="button" className="btn btn-outline-secondary" disabled>
+                        <AiFillCloseCircle />
+                        Đã sử dụng
+                      </button>
+                    ) : !checkNgaySuDung ? (
+                      <button type="button" className="btn btn-outline-danger" disabled>
+                        <AiFillMinusCircle />
+                        Hết hạn
+                      </button>
+                    ) : (
+                      <button type="button" className="btn btn-outline-success" disabled>
+                        <AiFillCheckCircle />
+                        Chưa sử dụng
+                      </button>
+                    )
+                  ) : (
                     <button type="button" className="btn btn-outline-danger" disabled>
                       <AiFillMinusCircle />
                       Hết hạn
-                    </button>
-                  ) : ticket.tinhTrang ? (
-                    <button type="button" className="btn btn-outline-secondary" disabled>
-                      <AiFillCloseCircle />
-                      Đã sử dụng
-                    </button>
-                  ) : (
-                    <button type="button" className="btn btn-outline-success" disabled>
-                      <AiFillCheckCircle />
-                      Chưa sử dụng
                     </button>
                   )}
                 </td>

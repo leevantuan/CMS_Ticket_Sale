@@ -17,7 +17,7 @@ export default function ModalFilter(props: modalFilter) {
   const CheckboxGroup = Checkbox.Group;
 
   const [value, setValue] = useState(0);
-  const [checkedList, setCheckedList] = useState<CheckboxValueType[]>([]);
+  const [checkedList, setCheckedList] = useState<CheckboxValueType[]>(['0']);
   const [fromDate, setFromDate] = useState<string>('');
   const [toDate, setToDate] = useState<string>('');
 
@@ -100,19 +100,19 @@ export default function ModalFilter(props: modalFilter) {
               <Checkbox value="0">Tất cả</Checkbox>
             </Col>
             <Col span={8}>
-              <Checkbox value="1">Cổng 1</Checkbox>
+              <Checkbox value="Cổng 1">Cổng 1</Checkbox>
             </Col>
             <Col span={8}>
-              <Checkbox value="2">Cổng 2</Checkbox>
+              <Checkbox value="Cổng 2">Cổng 2</Checkbox>
             </Col>
             <Col span={8}>
-              <Checkbox value="3">Cổng 3</Checkbox>
+              <Checkbox value="Cổng 3">Cổng 3</Checkbox>
             </Col>
             <Col span={8}>
-              <Checkbox value="4">Cổng 4</Checkbox>
+              <Checkbox value="Cổng 4">Cổng 4</Checkbox>
             </Col>
             <Col span={8}>
-              <Checkbox value="5">Cổng 5</Checkbox>
+              <Checkbox value="Cổng 5">Cổng 5</Checkbox>
             </Col>
           </Row>
         </CheckboxGroup>

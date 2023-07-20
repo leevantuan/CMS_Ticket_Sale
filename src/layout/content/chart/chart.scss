@@ -10,5 +10,37 @@
   }
 }
 .chart-top-one {
-  height: 400px;
+  .chart-line {
+    height: 360px;
+    width: 100%;
+    justify-content: center;
+    > canvas {
+      width: 1600px !important;
+    }
+  }
+}
+.title-line {
+  font-size: 24px;
+}
+.chart-donut {
+  width: 220px;
+  height: 220px;
+  margin-left: 130px;
+}
+.description {
+  margin: 32px 130px;
+  .color-bgc-use {
+    width: 56px;
+    height: 28px;
+    border-radius: 4px;
+    margin-right: 20px;
+    background-color: #4f75ff;
+  }
+  .color-bgc-noUse {
+    width: 56px;
+    height: 28px;
+    border-radius: 4px;
+    margin-right: 20px;
+    background-color: #ff8a48;
+  }
 }

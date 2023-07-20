@@ -17,8 +17,11 @@ export default function DoiSoatVe() {
   const [radioState, setRadioState] = useState<number>(0);
   const [inputSearch, setInputSearch] = useState<string>('');
 
-  const [filterFromDate, setFilterFromDate] = useState<Date>();
-  const [filterToDate, setFilterToDate] = useState<Date>();
+  const setFilterDateFrom = ConvertToTimestamp('01/07/2023', '00:00:00');
+  const setFilterDateTo = ConvertToTimestamp('01/08/2023', '00:00:00');
+
+  const [filterFromDate, setFilterFromDate] = useState<Date>(setFilterDateFrom);
+  const [filterToDate, setFilterToDate] = useState<Date>(setFilterDateTo);
 
   const onChange = (e: RadioChangeEvent) => {
     setRadioState(e.target.value);

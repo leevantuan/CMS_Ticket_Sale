@@ -7,7 +7,7 @@ import ModalFilter from '../../../shared/components/modal/modalFilter';
 import ModalUpdate from '../../../shared/components/modal/modalUpdate';
 
 import { AiOutlineFilter } from 'react-icons/ai';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/hook';
 import { CheckboxValueType } from 'antd/es/checkbox/Group';
 import { ConvertToTimestamp } from '../../../handleLogic/handle';
@@ -18,16 +18,21 @@ export default function ManagerTicket() {
   const dispatch = useAppDispatch();
   const listServiceStore = useAppSelector(state => state.tickets.services);
 
-  const [typeTicket, setTypeTicket] = useState<string>('Gói gia đình');
+  const [typeTicket, setTypeTicket] = useState<string>('');
+  useEffect(() => {
+    const listServiceName = listServiceStore.map(service => service.serviceName);
+    setTypeTicket(listServiceName[0]);
+  }, [listServiceStore]);
+
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [modalUpdate, setModalUpdate] = useState<boolean>(false);
   const [ticketId, setTicketId] = useState<string>('');
   const [inputSearch, setInputSearch] = useState<string>('');
 
   const [value, setValue] = useState(0);
-  const [checkedList, setCheckedList] = useState<CheckboxValueType[]>([]);
-  const [fromDate, setFromDate] = useState<string>('');
-  const [toDate, setToDate] = useState<string>('');
+  const [checkedList, setCheckedList] = useState<CheckboxValueType[]>(['0']);
+  const [fromDate, setFromDate] = useState<string>('01/07/2023');
+  const [toDate, setToDate] = useState<string>('01/08/2023');
 
   const HandleClickModalOpen = () => {
     setModalOpen(false);

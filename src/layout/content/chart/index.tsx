@@ -38,6 +38,7 @@ export default function Chart() {
   const [countFalseGD, setCountFalseGD] = useState<number>(0);
 
   const [tongDoanhThu, setTongDoanhThu] = useState<number[]>([]);
+  const [totalPriceWeek, setTotalPriceWeek] = useState<number>(0);
 
   useEffect(() => {
     const filterMonth = listTicketStore.filter(ticket => {
@@ -79,14 +80,25 @@ export default function Chart() {
     setMonthSearch1(dateString);
   };
 
+  const createLinearGradient = () => {
+    const ctx = document.createElement('canvas').getContext('2d');
+    if (ctx) {
+      const gradient = ctx.createLinearGradient(0, 0, 0, 190);
+      gradient.addColorStop(0, '#FAA05F');
+      gradient.addColorStop(1, '#FFFFFF');
+      return gradient;
+    }
+    return {} as CanvasGradient;
+  };
+
   const dataGoiSuKien = {
     labels: [],
     datasets: [
       {
         label: 'Số vé',
         data: [countTrueSK, countFalseSK],
-        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
-        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
+        backgroundColor: ['#FF8A48', '#4F75FF'],
+        borderColor: ['#FF8A48', '#4F75FF'],
         borderWidth: 1,
       },
     ],
@@ -97,8 +109,8 @@ export default function Chart() {
       {
         label: 'Số vé',
         data: [countTrueGD, countFalseGD],
-        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
-        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
+        backgroundColor: ['#FF8A48', '#4F75FF'],
+        borderColor: ['#FF8A48', '#4F75FF'],
         borderWidth: 1,
       },
     ],
@@ -111,27 +123,52 @@ export default function Chart() {
         fill: true,
         label: 'Doanh thu (Tr)',
         data: tongDoanhThu,
-        borderColor: 'rgb(53, 162, 235)',
-        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        backgroundColor: createLinearGradient(),
+        // spanGaps: true,
+        tension: 0.5,
+        borderColor: '#FF993C',
+        // pointBorderColor: 'transparent',
       },
     ],
   };
 
+  const options = {
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  };
+  useEffect(() => {
+    let newTotal: number = 0;
+    tongDoanhThu.forEach(total => (newTotal += total));
+    setTotalPriceWeek(newTotal);
+  }, [tongDoanhThu]);
+
   return (
     <div className="container-chart" style={{ marginTop: '80px', borderRadius: 18 }}>
-      <p className="title-chart m-4 pt-3">Thống kê</p>
-      <Space direction="vertical">
-        <DatePicker
-          onChange={onChange}
-          defaultValue={dayjs(monthSearch, monthFormat)}
-          format={monthFormat}
-          picker="month"
-        />
-      </Space>
-      <div className="chart-top-one">
-        <Line data={data} />;
+      <p className="title-chart ms-4 pt-3">Thống kê</p>
+      <div className="d-flex justify-content-between ms-4 me-4">
+        <p className="title-line">Doanh Thu</p>
+        <span>
+          <DatePicker
+            onChange={onChange}
+            defaultValue={dayjs(monthSearch, monthFormat)}
+            format={monthFormat}
+            picker="month"
+          />
+        </span>
       </div>
-      <div className="chart-bottom-one d-flex">
+      <div className="chart-top-one me-4 ms-4">
+        <div className="chart-line d-flex">
+          <Line data={data} options={options} />
+        </div>
+        <div className="total-price mt-3">
+          <h6>Tổng doanh thu theo tuần</h6>
+          <h2>{totalPriceWeek}.000 đồng</h2>
+        </div>
+      </div>
+      <div className="chart-bottom-one d-flex ms-4 mt-4">
         <Space direction="vertical">
           <DatePicker
             onChange={onChange1}
@@ -140,13 +177,23 @@ export default function Chart() {
             picker="month"
           />
         </Space>
-        <div style={{ width: 300, height: 300 }}>
+        <div className="chart-donut">
           <h5 className="text-center fw-bold">Gói sự kiện</h5>
           <Doughnut data={dataGoiSuKien} />
         </div>
-        <div style={{ width: 300, height: 300 }}>
+        <div className="chart-donut">
           <h5 className="text-center fw-bold">Gói gia đình</h5>
           <Doughnut data={dataGoiGiaDinh} />
+        </div>
+        <div className="description">
+          <div className="d-flex m-4">
+            <span className="color-bgc-use"> </span>
+            <h5>Vé chưa sử dụng</h5>
+          </div>
+          <div className="d-flex m-4">
+            <span className="color-bgc-noUse"> </span>
+            <h5>Vé đã sử dụng</h5>
+          </div>
         </div>
       </div>
     </div>
