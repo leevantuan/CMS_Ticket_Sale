@@ -3,11 +3,11 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 const adminConfig = {
-  apiKey: 'AIzaSyAaZ1H7Dw4MyEyejeVeuZqjMmzc6ets9vA',
+  apiKey: process.env.API_KEY,
   authDomain: 'ticket-sale-aaea7.firebaseapp.com',
   projectId: 'ticket-sale-aaea7',
   storageBucket: 'ticket-sale-aaea7.appspot.com',
-  messagingSenderId: '775061735986',
+  messagingSenderId: process.env.SENDER_ID,
   appId: '1:775061735986:web:29570eae9e5b392f4d8a2b',
 };
 
