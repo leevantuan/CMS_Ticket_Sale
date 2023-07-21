@@ -10,7 +10,7 @@ import { AiOutlineFilter } from 'react-icons/ai';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/hook';
 import { CheckboxValueType } from 'antd/es/checkbox/Group';
-import { ConvertToTimestamp } from '../../../handleLogic/handle';
+import { ConvertToTimestamp } from '../../../../handleLogic/handle';
 import { updateTicketsInterface } from '../../../@types/types';
 import { updateDataTickets } from '../../../core/redux';
 

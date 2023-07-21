@@ -11,7 +11,7 @@ import {
   updateServicesInterface,
   updateTicketsInterface,
 } from '../../@types/types';
-import { HandleDates, HandleTimes } from '../../handleLogic/handle';
+import { HandleDates, HandleTimes } from '../../../handleLogic/handle';
 
 export const ticketsRef = query(collection(db, 'tickets'));
 export const servicesRef = query(collection(db, 'services'));

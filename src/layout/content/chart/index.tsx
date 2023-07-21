@@ -5,7 +5,11 @@ import { useAppSelector } from '../../../shared/hooks/hook';
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import moment from 'moment';
-import { HandleListWeek, HandleTotalPrice, SoSanhMonthTicket } from '../../../handleLogic/handle';
+import {
+  HandleListWeek,
+  HandleTotalPrice,
+  SoSanhMonthTicket,
+} from '../../../../handleLogic/handle';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { Line } from 'react-chartjs-2';
@@ -124,10 +128,10 @@ export default function Chart() {
         label: 'Doanh thu (Tr)',
         data: tongDoanhThu,
         backgroundColor: createLinearGradient(),
-        // spanGaps: true,
+        spanGaps: true,
         tension: 0.5,
         borderColor: '#FF993C',
-        // pointBorderColor: 'transparent',
+        pointBorderColor: 'transparent',
       },
     ],
   };

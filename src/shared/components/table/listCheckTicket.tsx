@@ -4,7 +4,7 @@ import { useAppSelector, useAppDispatch } from '../../../shared/hooks/hook';
 import { fetchData } from '../../../core/redux';
 import ReactPaginate from 'react-paginate';
 import { checkTicket, ticketsInterface } from '../../../@types/types';
-import { ConvertToTimestamp } from '../../../handleLogic/handle';
+import { ConvertToTimestamp } from '../../../../handleLogic/handle';
 
 export default function ListCheckTicket(props: checkTicket) {
   const [listTickets, setListTickets] = useState<ticketsInterface[]>([]);

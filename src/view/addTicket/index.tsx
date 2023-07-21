@@ -5,7 +5,7 @@ import { addDataTickets, fetchDataEvents, fetchDataServices } from '../../core/r
 import { DatePicker, DatePickerProps } from 'antd';
 import moment from 'moment';
 import dayjs from 'dayjs';
-import { ConvertToTimestamp, SoSanhDateTicket } from '../../handleLogic/handle';
+import { ConvertToTimestamp, SoSanhDateTicket } from '../../../handleLogic/handle';
 import { addTicketsInterface } from '../../@types/types';
 
 export default function AddTicket() {

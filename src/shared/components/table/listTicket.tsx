@@ -10,7 +10,7 @@ import { AiFillMinusCircle } from 'react-icons/ai';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import { AiOutlineMore } from 'react-icons/ai';
-import { ConvertToTimestamp, SoSanhDateTicket } from '../../../handleLogic/handle';
+import { ConvertToTimestamp, SoSanhDateTicket } from '../../../../handleLogic/handle';
 
 export default function ListTicket(props: openModalUpdate) {
   const [listTickets, setListTicket] = useState<ticketsInterface[]>([]);

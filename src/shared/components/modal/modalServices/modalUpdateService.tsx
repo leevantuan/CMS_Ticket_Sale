@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
 import { DatePicker, DatePickerProps, Modal, TimePicker, TimePickerProps } from 'antd';
 import type { CheckboxValueType } from 'antd/es/checkbox/Group';
 import { Checkbox } from 'antd';
-import { HandleCheckUpdateService, HandleStateService } from '../../../../handleLogic/handle';
+import { HandleCheckUpdateService, HandleStateService } from '../../../../../handleLogic/handle';
 
 export default function ModalUpdateService(props: openModalUpdateService) {
   const dispatch = useAppDispatch();
@@ -49,6 +49,7 @@ export default function ModalUpdateService(props: openModalUpdateService) {
       setServiceName(findService.serviceName);
       setPrice(findService.price);
       setPriceCombo(findService.combo);
+      setQuantity(findService.quantity);
     }
   }, [findService]);
 

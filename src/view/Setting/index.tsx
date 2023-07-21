@@ -7,7 +7,7 @@ import ListServices from '../../shared/components/table/listServices';
 import ModalUpdateService from '../../shared/components/modal/modalServices/modalUpdateService';
 import { useAppDispatch } from '../../shared/hooks/hook';
 import moment from 'moment';
-import { ConvertToTimestamp, SoSanhDate } from '../../handleLogic/handle';
+import { ConvertToTimestamp, SoSanhDate } from '../../../handleLogic/handle';
 import { addServicesInterface, updateServicesInterface } from '../../@types/types';
 import { addDataServices, updateDataServices } from '../../core/redux';
 

@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 import { DatePicker, DatePickerProps, Modal } from 'antd';
 import { useAppSelector, useAppDispatch } from '../../hooks/hook';
 import { fetchData, updateDataTickets } from '../../../core/redux';
-import { ConvertToTimestamp } from '../../../handleLogic/handle';
+import { ConvertToTimestamp } from '../../../../handleLogic/handle';
 
 export default function ModalUpdate(props: modalUpdate) {
   const dispatch = useAppDispatch();
